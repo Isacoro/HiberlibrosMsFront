@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" 
+      th:replace="administrador/vistaAdministrador::layout(~{::body})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Editoriales</title>
+</head>
+<body>
+    <p th:if="${borrado!=null}" id="mensajeBorrado" style="display:none"><span  th:text=${borrado}></span></p>
+        <div class="fondo col-sm p-3 min-vh-100">
+            
+            <div class="container">
+                <a onclick="altaEditorial()" class="btn btn-dark"><i class="far fa-trash-alt" ><span style="margin-left:5px">Insertar Editorial</span></i></a>
+                <table class="table table-light mt-5 col-5">
+                    <thead class="text-white bg-primary">
+                        <tr>
+                            <th>ID</th>
+                            <th>Editorial</th>
+                            <th colspan="2" class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="edit:${editoriales}">
+                            <td  th:text="${edit.id}"></td>
+                            <td class="list-group-item-text lead" th:text="${edit.nombreEditorial}"></td>
+                            <td>
+                                <a id="editarboton" class="btn btn-dark btn-sm" th:onclick="|editarEditorial(${edit.id})|">Editar</a>
+                                <a id="eliminarboton" class="btn btn-dark btn-sm" th:onclick="|borrarEditorial(${edit.id})|">Borrar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>		 			
+            </div>
+
+            <div style="display:none" id="editarEditorial">
+                <form action="/editoriales/modificacion" method="post">
+                    <label>Editorial</label>
+                    <input type="hidden" name="id"/>
+                    <input type="text" name="nombreEditorial"/>
+                    <input type="submit" value="Añadir" class="btn btn-primary"/>   
+                </form>
+            </div>
+        </div>
+    </body>
+
+
+</html>

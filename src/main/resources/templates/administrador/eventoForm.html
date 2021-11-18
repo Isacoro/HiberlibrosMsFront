@@ -1,0 +1,17 @@
+<html xmlns:th="https://www.thymeleaf.org">
+    <body>
+        <div class="row justify-content-center">
+            <form id="altaEvento" action="/hiberlibros/paneladmin/evento" method="post">
+
+                <input name="id" type="hidden" />
+                <label class="mb-2">Inicio:</label>
+                <input name="startDate" type="date"/>
+                <label class="mb-2">Fin:</label>
+                <input name="endDate" type="date"/>
+                <input name="summary" type="text" class="form-control form-control-lg" placeholder="Descripcion"/>
+                <button type="submit" class="btn btn btn-dark mt-2">Guardar</button>
+                <button type="cancel" class="btn btn btn-danger  mt-2 ml-3" onclick="window.location='/hiberlibros/paneladmin';return false;">Cancelar</button>
+            </form>
+        </div>
+    </body>
+</html>
