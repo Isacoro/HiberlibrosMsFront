@@ -48,5 +48,4 @@ public interface RelatoFeign {
 
     @GetMapping("/tablaRelato")
     public List<TablaRelatoDto> tablaRelato();
-
 }

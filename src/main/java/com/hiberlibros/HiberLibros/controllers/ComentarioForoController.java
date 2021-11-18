@@ -7,10 +7,7 @@ package com.hiberlibros.HiberLibros.controllers;
 
 import com.hiberlibros.HiberLibros.dtos.ForoComentariosDto;
 import com.hiberlibros.HiberLibros.feign.ComentarioForoFeign;
-import com.hiberlibros.HiberLibros.interfaces.IComentarioForoService;
-import com.hiberlibros.HiberLibros.interfaces.IForoLibroService;
 import com.hiberlibros.HiberLibros.interfaces.ISeguridadService;
-import com.hiberlibros.HiberLibros.interfaces.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,23 +15,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-/**
- *
- * @author Usuario
- */
+
 @Controller
 @RequestMapping("hilos")
 public class ComentarioForoController {
 
     @Autowired
-    private ISeguridadService serviceSeguridad;
-
+    private ISeguridadService seguridadService;
     @Autowired
-    private ComentarioForoFeign feignComentario;
+    private ComentarioForoFeign comentarioForoFeign;
+
 
     @GetMapping("/consultarPorForo")
     public String consultarComentariosPorForo(Model m, Integer idForo) {
-        ForoComentariosDto foroComentarios = feignComentario.consultarComentariosPorForo(idForo);
+        ForoComentariosDto foroComentarios = comentarioForoFeign.consultarComentariosPorForo(idForo);
         m.addAttribute("foro", foroComentarios.getForo());
         m.addAttribute("comentarios", foroComentarios.getComentarios());
 
@@ -44,7 +38,7 @@ public class ComentarioForoController {
     @PostMapping("/alta")
     public String altaComentario(Model m, Integer idForoLibro, String comentario) {
 
-        ForoComentariosDto foroComentarios = feignComentario.altaComentario(idForoLibro, comentario, serviceSeguridad.getMailFromContext());
+        ForoComentariosDto foroComentarios = comentarioForoFeign.altaComentario(idForoLibro, comentario, seguridadService.getMailFromContext());
 
         m.addAttribute("foro", foroComentarios.getForo());
         m.addAttribute("comentarios", foroComentarios.getComentarios());

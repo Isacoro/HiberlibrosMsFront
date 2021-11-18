@@ -14,7 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.Comparator;
 import java.util.UUID;
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -23,8 +23,7 @@ public class RelatoService implements IRelatoService {
 
     @Autowired
     private RelatoRepository relatoRepository;
-    
-    @Autowired IUsuarioService serviceUsu;
+    @Autowired IUsuarioService usuarioService;
 
     @Override
     public List<Relato> buscarRelato(String titulo) {
@@ -39,7 +38,9 @@ public class RelatoService implements IRelatoService {
     @Override
     public List<Relato> buscarPorValoracionMayorAMenor() {
         List<Relato> rel = relatoRepository.findAll();
-        List<Relato> relato = rel.stream().sorted(Comparator.comparingDouble(Relato::getValoracionUsuarios)).collect(Collectors.toList());
+        List<Relato> relato = rel.stream()
+                .sorted(Comparator.comparingDouble(Relato::getValoracionUsuarios))
+                .collect(Collectors.toList());
 
         return relato;
     }
@@ -47,7 +48,10 @@ public class RelatoService implements IRelatoService {
     @Override
     public List<Relato> buscarPorValoracionMenorAMayor() {
         List<Relato> rel = relatoRepository.findAll();
-        List<Relato> relato = rel.stream().sorted(Comparator.comparingDouble(Relato::getValoracionUsuarios).reversed()).collect(Collectors.toList());
+        List<Relato> relato = rel.stream()
+                .sorted(Comparator.comparingDouble(Relato::getValoracionUsuarios)
+                        .reversed())
+                .collect(Collectors.toList());
 
         return relato;
     }
@@ -59,7 +63,7 @@ public class RelatoService implements IRelatoService {
 
     @Override
     public void guardarRelato(String RUTA_BASE, Relato relato, MultipartFile ficherosubido, Integer id) {
-       String nombre = UUID.randomUUID().toString();
+        String nombre = UUID.randomUUID().toString();
         String nombreFichero = ficherosubido.getOriginalFilename().toLowerCase();
         String extension = nombreFichero.substring(nombreFichero.lastIndexOf("."));
         System.out.println("Extension : " + extension);
@@ -71,11 +75,10 @@ public class RelatoService implements IRelatoService {
             relato.setFichero(subir);
             relato.setValoracionUsuarios(new Double(0));
             relato.setNumeroValoraciones(0);
-            relato.setUsuario(serviceUsu.usuarioId(id));
+            relato.setUsuario(usuarioService.usuarioId(id));
             relatoRepository.save(relato);
         } catch (Exception e) {
-            e.printStackTrace(); 
-
+            e.printStackTrace();
         }
     }
 }

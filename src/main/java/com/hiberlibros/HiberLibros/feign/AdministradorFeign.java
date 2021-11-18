@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.hiberlibros.HiberLibros.feign;
 
-import com.hiberlibros.HiberLibros.dtos.EventoDTO;
+import com.hiberlibros.HiberLibros.dtos.EventoDto;
 import com.hiberlibros.HiberLibros.feign.inicioDto.AdminHubDto;
 import java.util.Date;
 import java.util.List;
@@ -35,5 +30,5 @@ public interface AdministradorFeign {
     public void eliminar(@RequestParam Integer id);
     
     @GetMapping("/buscarEvento")
-    public List<EventoDTO> buscar(@RequestParam String search); 
+    public List<EventoDto> buscar(@RequestParam String search);
 }

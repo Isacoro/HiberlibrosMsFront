@@ -12,10 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- *
- * @author Isabel
- */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -38,5 +35,4 @@ public class Genero {
 
     @OneToMany(mappedBy = "id")
     private List<Preferencia> listaPreferencias;
-
 }

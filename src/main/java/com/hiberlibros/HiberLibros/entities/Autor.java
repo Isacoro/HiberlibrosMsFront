@@ -25,23 +25,11 @@ public class Autor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idAutor;
-    @Column
     private String nombre;
-    @Column
     private String apellidos;
-    @Column
     private String biografia;
-    
     private Boolean desactivado;
 
     @OneToMany(mappedBy = "autor")
     private List<Libro> libros;
-
-//    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)//si  se borra autor, se borra relacion de autor_libro
-//    private List<AutorLibro> autorLibros;
-
-//    @Override
-//    public String toString() {
-//        return ""+nombre + " " + apellidos;
-//    }
 }

@@ -19,5 +19,4 @@ public interface PeticionRepository extends JpaRepository<Peticion, Integer> {
     public void deleteByIdUsuarioSolicitante(Usuario u); 
     
     public void deleteByIdUsuarioLibro(UsuarioLibro ul);
-
 }

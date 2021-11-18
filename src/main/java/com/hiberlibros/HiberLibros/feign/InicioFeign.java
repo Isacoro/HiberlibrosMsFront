@@ -1,9 +1,7 @@
 package com.hiberlibros.HiberLibros.feign;
 
-import com.hiberlibros.HiberLibros.configuracion.FeignSupportConfig;
 import com.hiberlibros.HiberLibros.dtos.AutorDto;
-import com.hiberlibros.HiberLibros.dtos.LibroDtoMS;
-import com.hiberlibros.HiberLibros.dtos.RelatoDto;
+import com.hiberlibros.HiberLibros.dtos.LibroDto;
 import com.hiberlibros.HiberLibros.dtos.TablaLibrosDto;
 import com.hiberlibros.HiberLibros.dtos.UsuarioLibroDto;
 import com.hiberlibros.HiberLibros.entities.Usuario;
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -60,7 +57,7 @@ public interface InicioFeign {
     public void formularioRelato( MultipartFile ficherosubido, @SpringQueryMap RelatoEnvioDto relatoDto);
 
     @PostMapping("/registroLibro")
-    public String registrarLibro(@RequestParam String quieroTengo, @RequestParam String estadoConservacion,@SpringQueryMap LibroDtoMS l,@RequestParam Integer id_genero,@RequestParam Integer id_editorial, @RequestParam Integer id_autor, @RequestParam String email);
+    public String registrarLibro(@RequestParam String quieroTengo, @RequestParam String estadoConservacion, @SpringQueryMap LibroDto l, @RequestParam Integer id_genero, @RequestParam Integer id_editorial, @RequestParam Integer id_autor, @RequestParam String email);
     
     @PostMapping("/saveAutor") 
     public void insertarAutor(@SpringQueryMap AutorDto autor);
@@ -73,6 +70,4 @@ public interface InicioFeign {
     
     @GetMapping("/panelUsuario") 
     public PanelUsuarioDto panelUsuario(@RequestParam String mail);
-    
-    
 }

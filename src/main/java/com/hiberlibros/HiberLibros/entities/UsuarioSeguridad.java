@@ -25,7 +25,6 @@ public class UsuarioSeguridad {
     private Integer id;
 
     private Integer idUsuario;
-
     private String mail;
     private String password;
 

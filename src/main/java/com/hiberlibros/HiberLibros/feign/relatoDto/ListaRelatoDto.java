@@ -14,5 +14,4 @@ public class ListaRelatoDto {
 
    private List<RelatoDto> relatos;
    private UsuarioDto usuario;
-
 }

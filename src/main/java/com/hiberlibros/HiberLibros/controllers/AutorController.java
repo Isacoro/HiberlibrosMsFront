@@ -18,6 +18,7 @@ public class AutorController {
     @Autowired
     private AutorFeign autorFeign;
 
+
     @GetMapping("/autores/listarAdmin")
     public String listaAdmin(Model m, String borrado) {
     	VerAutoresDto map = autorFeign.listaAdmin(borrado);

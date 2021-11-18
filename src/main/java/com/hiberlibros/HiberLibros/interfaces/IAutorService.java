@@ -16,6 +16,4 @@ public interface IAutorService {
     public List<Autor> buscarAutores(String buscar);
 
     public List<Autor> consultarAutores();
-
-//    public List<LibroDto> getLibros(Integer id);
 }

@@ -10,6 +10,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class GeneroDto {
+
     private Integer id;
     private String nombre;
     private Boolean desactivado;

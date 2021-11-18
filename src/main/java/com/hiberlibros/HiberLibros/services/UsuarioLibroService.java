@@ -6,52 +6,49 @@ import com.hiberlibros.HiberLibros.entities.UsuarioLibro;
 import com.hiberlibros.HiberLibros.repositories.UsuarioLibroRepository;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.hiberlibros.HiberLibros.interfaces.IUsuarioLibroService;
 
-/**
- *
- * @author Usuario
- */
+
 @Service
 public class UsuarioLibroService implements IUsuarioLibroService {
 
     @Autowired
-    private UsuarioLibroRepository ulRepo;
+    private UsuarioLibroRepository usuarioLibroRepository;
     @Autowired
-    private LibroService libService;
+    private LibroService libroService;
+
 
     @Override
     public UsuarioLibro encontrarId(Integer id) {
-        return ulRepo.findById(id).get();
+        return usuarioLibroRepository.findById(id).get();
     }
 
     @Override
     public List<UsuarioLibro> buscarContiene(String buscador, Integer id) {
         List<UsuarioLibro> ul = new ArrayList<>();
-        List<Libro> l = libService.buscarLibro(buscador); //busca libros que contentan ese parámetro       
+        List<Libro> l = libroService.buscarLibro(buscador); //busca libros que contentan ese parámetro
         l.forEach(x -> {
-            List<UsuarioLibro> ulAux = ulRepo.findByLibroAndQuieroTengoAndEstadoPrestamo(x, "Tengo", "Libre");//Encuentra los libros que coiniciden dentro de usuarioLibros
+            List<UsuarioLibro> ulAux = usuarioLibroRepository.findByLibroAndQuieroTengoAndEstadoPrestamo(x, "Tengo", "Libre");//Encuentra los libros que coiniciden dentro de usuarioLibros
             ulAux.forEach(y -> {
                 if (y.getUsuario().getId() != id) {
                     ul.add(y);
                 }
             });
         });
-
         return ul;
     }
 
     @Override
     public List<UsuarioLibro> buscarUsuario(Usuario u) {//busca por usuario
-        return ulRepo.findByUsuario(u);
+        return usuarioLibroRepository.findByUsuario(u);
     }
 
     @Override
     public List<UsuarioLibro> todos() {
-        return ulRepo.findAll();
+        return usuarioLibroRepository.findAll();
     }
 
     @Override
@@ -59,8 +56,7 @@ public class UsuarioLibroService implements IUsuarioLibroService {
         ul.setLibro(l);
         ul.setUsuario(u);
         ul.setDesactivado(Boolean.FALSE);
-        ulRepo.save(ul);
-
+        usuarioLibroRepository.save(ul);
     }
 
     @Override
@@ -77,34 +73,34 @@ public class UsuarioLibroService implements IUsuarioLibroService {
 
     @Override
     public List<UsuarioLibro> buscarUsuarioDisponibilidad(Usuario u, String tengo, String disponibilidad) {
-        return ulRepo.findByUsuarioAndQuieroTengoAndEstadoPrestamo(u, tengo, disponibilidad);
+        return usuarioLibroRepository.findByUsuarioAndQuieroTengoAndEstadoPrestamo(u, tengo, disponibilidad);
     }
 
     @Override
     public void editar(UsuarioLibro ul) {
-        ulRepo.save(ul);
+        usuarioLibroRepository.save(ul);
     }
 
     @Override
     public List<UsuarioLibro> buscarUsuariotiene(Usuario u) {
-        return ulRepo.findByUsuarioAndDesactivadoOrderByQuieroTengoAsc(u, Boolean.FALSE);
+        return usuarioLibroRepository.findByUsuarioAndDesactivadoOrderByQuieroTengoAsc(u, Boolean.FALSE);
     }
 
     @Override
     public List<UsuarioLibro> buscarDisponibles(Usuario u) {
-        return ulRepo.findByUsuarioNotAndQuieroTengoAndEstadoPrestamo(u, "Tengo", "Libre");
+        return usuarioLibroRepository.findByUsuarioNotAndQuieroTengoAndEstadoPrestamo(u, "Tengo", "Libre");
     }
 
     @Override
     public Boolean usuarioBorrado(Usuario u) {
-        List<UsuarioLibro> ul = ulRepo.findByUsuarioAndDesactivadoAndEstadoPrestamo(u, Boolean.FALSE, "ocupado");
+        List<UsuarioLibro> ul = usuarioLibroRepository.findByUsuarioAndDesactivadoAndEstadoPrestamo(u, Boolean.FALSE, "ocupado");
         if (!ul.isEmpty()) {
             return false;
         } else {
-            ul = ulRepo.findByUsuarioAndDesactivado(u, Boolean.FALSE);
+            ul = usuarioLibroRepository.findByUsuarioAndDesactivado(u, Boolean.FALSE);
             ul.forEach(x -> {
                 x.setDesactivado(Boolean.TRUE);
-                ulRepo.save(x);
+                usuarioLibroRepository.save(x);
             });
             return true;
         }
@@ -112,14 +108,14 @@ public class UsuarioLibroService implements IUsuarioLibroService {
 
     @Override
     public Boolean libroBorrado(Libro l) {
-        List<UsuarioLibro> ul = ulRepo.findByLibroAndDesactivadoAndEstadoPrestamo(l, Boolean.FALSE, "ocupado");
+        List<UsuarioLibro> ul = usuarioLibroRepository.findByLibroAndDesactivadoAndEstadoPrestamo(l, Boolean.FALSE, "ocupado");
         if (!ul.isEmpty()) {
             return false;
         } else {
-            ul = ulRepo.findByLibroAndDesactivado(l, Boolean.FALSE);
+            ul = usuarioLibroRepository.findByLibroAndDesactivado(l, Boolean.FALSE);
             ul.forEach(x -> {
                 x.setDesactivado(Boolean.TRUE);
-                ulRepo.save(x);
+                usuarioLibroRepository.save(x);
             });
             return true;
         }
@@ -127,7 +123,7 @@ public class UsuarioLibroService implements IUsuarioLibroService {
 
     @Override
     public List<UsuarioLibro> buscarLibro(Libro l) {
-        return ulRepo.findByLibroAndDesactivadoAndEstadoPrestamo(l, Boolean.FALSE, "ocupado");
+        return usuarioLibroRepository.findByLibroAndDesactivadoAndEstadoPrestamo(l, Boolean.FALSE, "ocupado");
     }
 
     @Override
@@ -145,7 +141,6 @@ public class UsuarioLibroService implements IUsuarioLibroService {
 
     @Override
     public Integer contarLibrosPorUsuario(Usuario u) {
-        return ulRepo.countByUsuarioAndDesactivado(u, Boolean.FALSE);
+        return usuarioLibroRepository.countByUsuarioAndDesactivado(u, Boolean.FALSE);
     }
-
 }

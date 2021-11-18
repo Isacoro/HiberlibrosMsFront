@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.hiberlibros.HiberLibros.dtos;
 
 import lombok.AllArgsConstructor;
@@ -12,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LibroDtoMS {//había otro dto que no sé muy bien de que es
+public class LibroDto {
 
     private Integer id;
     private String isbn;
@@ -25,5 +20,4 @@ public class LibroDtoMS {//había otro dto que no sé muy bien de que es
     private AutorDto autor;
     private EditorialDto editorial;
     private GeneroDto genero;
-
 }

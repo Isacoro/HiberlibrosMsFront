@@ -8,47 +8,42 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.hiberlibros.HiberLibros.interfaces.IPreferenciaService;
-import com.hiberlibros.HiberLibros.repositories.UsuarioRepository;
 
-/**
- *
- * @author Isabel
- */
+
 @Service
 public class PreferenciaService implements IPreferenciaService {
 
     @Autowired
-    private PreferenciaRepository prefRepo;
-    @Autowired
-    private UsuarioRepository usuRepo;
+    private PreferenciaRepository preferenciaRepository;
+
 
     @Override
     public List<Preferencia> findByUsuario(Usuario usuario) {
-        return prefRepo.findByUsuario(usuario);
+        return preferenciaRepository.findByUsuario(usuario);
     }
 
     @Override
     public List<Preferencia> findAll() {
-        return prefRepo.findAll();
+        return preferenciaRepository.findAll();
     }
 
     @Override
     public void addPreferencia(Preferencia preferencia) {
-        prefRepo.save(preferencia);
+        preferenciaRepository.save(preferencia);
     }
 
     @Override
     public void borrarPreferencia(Integer id) {
-        prefRepo.deleteById(id);
+        preferenciaRepository.deleteById(id);
     }
 
     @Override
     public void borrarPorGenero(Genero g) {
-        prefRepo.deleteByGenero(g);
+        preferenciaRepository.deleteByGenero(g);
     }
 
     @Override
     public List<Preferencia> encontrarPorGenero(Genero g) {
-        return prefRepo.findByGenero(g);
+        return preferenciaRepository.findByGenero(g);
     }
 }

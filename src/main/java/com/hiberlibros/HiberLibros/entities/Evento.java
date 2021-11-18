@@ -23,9 +23,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name = "eventos")
 public class Evento {
-     @Id
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    private String summary;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")    
     @Temporal(javax.persistence.TemporalType.DATE) 
     private Date startDate;
@@ -35,6 +39,6 @@ public class Evento {
     private Date endDate;
     
     
-    private String summary;
+
     
 }

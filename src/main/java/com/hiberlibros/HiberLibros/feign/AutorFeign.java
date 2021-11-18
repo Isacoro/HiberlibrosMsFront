@@ -30,5 +30,4 @@ public interface AutorFeign {
 
     @PostMapping("/guardarAutor")
     public void guardarAutor(@SpringQueryMap Autor autor);
-
 }

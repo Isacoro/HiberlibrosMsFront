@@ -1,7 +1,7 @@
 package com.hiberlibros.HiberLibros.controllers;
 
 import com.hiberlibros.HiberLibros.dtos.CalendarioDto;
-import com.hiberlibros.HiberLibros.dtos.EventoDTO;
+import com.hiberlibros.HiberLibros.dtos.EventoDto;
 import com.hiberlibros.HiberLibros.feign.AdministradorFeign;
 import com.hiberlibros.HiberLibros.feign.inicioDto.AdminHubDto;
 import java.util.List;
@@ -21,6 +21,7 @@ public class AdministradorControlller {
     @Autowired
     private AdministradorFeign administradorFeign;
 
+
     @GetMapping
     public String adminHub(Model m) {
            AdminHubDto ahd = administradorFeign.adminHub();
@@ -31,19 +32,18 @@ public class AdministradorControlller {
     } 
     
     @GetMapping("/addEvent")
-    public String formEvento(){
+     public String formEvento(){
         return "administrador/eventoForm";
     }
    
     @PostMapping("/evento")
      public String addEvento(CalendarioDto e){
-
         administradorFeign.addEvento(e.getId(),e.getStartDate(),e.getEndDate(),e.getSummary());
         
         return "redirect:/hiberlibros/paneladmin";
     }
      
-     @GetMapping("/deleteEvento")
+    @GetMapping("/deleteEvento")
     @ResponseBody
       public void eliminar(Integer id){
           administradorFeign.eliminar(id);
@@ -51,12 +51,12 @@ public class AdministradorControlller {
       
     @GetMapping("/buscarEvento")
     @ResponseBody
-    public List<EventoDTO> buscar(String search){
+     public List<EventoDto> buscar(String search){
        return administradorFeign.buscar(search);
     }
     
     @GetMapping("/contacto")
-    public String adminContacto(Model m) {
+     public String adminContacto(Model m) {
         return "administrador/contacto";
     }
 }

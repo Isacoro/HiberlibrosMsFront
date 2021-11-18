@@ -4,10 +4,7 @@ import com.hiberlibros.HiberLibros.entities.Intercambio;
 import com.hiberlibros.HiberLibros.entities.UsuarioLibro;
 import java.util.List;
 
-/**
- *
- * @author Usuario
- */
+
 public interface IIntercambioService {
 
     public void guardarIntercambio(UsuarioLibro ul_prestatario, UsuarioLibro ul_prestador);
@@ -21,6 +18,4 @@ public interface IIntercambioService {
     public Boolean intercambioPendienteFinalizar(UsuarioLibro ul);
     
     public Integer contarIntercambiosPendientes(List<UsuarioLibro> ul);
-    
-
 }

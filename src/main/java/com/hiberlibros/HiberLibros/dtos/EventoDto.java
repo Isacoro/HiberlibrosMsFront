@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EventoDTO {
+public class EventoDto {
     private Integer value;
     private String text;
 }

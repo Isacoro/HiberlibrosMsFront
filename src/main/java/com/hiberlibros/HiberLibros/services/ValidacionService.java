@@ -1,8 +1,6 @@
 package com.hiberlibros.HiberLibros.services;
 
 import com.hiberlibros.HiberLibros.dtos.UsuarioDto;
-import com.hiberlibros.HiberLibros.repositories.UsuarioSeguridadRepository;
-import com.hiberlibros.HiberLibros.repositories.UsuarioRepository;
 import com.hiberlibros.HiberLibros.dtos.UsuarioSeguridadDto;
 import com.hiberlibros.HiberLibros.dtos.UsuarioSeguridadDtoFeign;
 import com.hiberlibros.HiberLibros.feign.UsuarioFeign;
@@ -18,25 +16,23 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Component
 public class ValidacionService implements UserDetailsService {
 
     
     @Autowired
-    private UsuarioFeign feignUsuario;
-    
+    private UsuarioFeign usuarioFeign;
     @Autowired
-    private UsuarioSeguridadFeign feignUsuarioSeguridad;
+    private UsuarioSeguridadFeign usuarioSeguridadFeign;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Optional<UsuarioDto> usuario =Optional.of(feignUsuario.usuarioSeguridadMail(username));
+        Optional<UsuarioDto> usuario =Optional.of(usuarioFeign.usuarioSeguridadMail(username));
         if (usuario.isPresent()) {
 
-            Optional<UsuarioSeguridadDtoFeign> usuarioSeguridad = Optional.of(feignUsuarioSeguridad.usuarioSeguridadSecurity(usuario.get().getId()));
+            Optional<UsuarioSeguridadDtoFeign> usuarioSeguridad = Optional.of(usuarioSeguridadFeign.usuarioSeguridadSecurity(usuario.get().getId()));
 
             if (usuario.isPresent()) {
 
@@ -58,5 +54,4 @@ public class ValidacionService implements UserDetailsService {
             throw new UsernameNotFoundException("Usuario/Password incorrecto");
         }
     }
-
 }

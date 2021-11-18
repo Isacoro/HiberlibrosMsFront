@@ -14,7 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-//@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -81,15 +80,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/usuarios/listarAdmin").hasRole("Administrador")
                 .antMatchers("/usuarios/altaAdmin").hasRole("Administrador")
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                
+
                 .antMatchers("/admin/info").permitAll()
                 .antMatchers("/admin/url1").hasAnyRole("Administrador", "Usuario")
                 .and()
@@ -102,7 +93,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .and()
                 .csrf().disable();
-
     }
 
     @Override
@@ -114,11 +104,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //Aquí se configura Usuario/Password
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-        /*auth.inMemoryAuthentication()
-                 .withUser("jorge").password("{noop}1111").roles("Usuario")
-                 .and()
-                 .withUser("juan").password("{noop}1111").roles("Administrador");*/
         int a = 3;
         auth.userDetailsService(validacion).passwordEncoder(passwordEncoder());
     }
@@ -127,5 +112,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }

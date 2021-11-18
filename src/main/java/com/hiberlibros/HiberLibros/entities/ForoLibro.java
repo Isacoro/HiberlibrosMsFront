@@ -15,10 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- *
- * @author Usuario
- */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,13 +25,12 @@ public class ForoLibro {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id; // id propio
+    private Integer id;
     
-    private Boolean desactivado; //desactivado / activado
+    private Boolean desactivado;
+    private String  tituloForo;
     
-    private String  tituloForo; // titulo del foro
-    
-    @ManyToOne//pk libro
+    @ManyToOne
     @JoinColumn(name= "id_libro")
     private Libro   idLibro;   // libro del que es el foro
     
@@ -44,5 +40,4 @@ public class ForoLibro {
 
     @OneToMany(mappedBy = "id" ,fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<ComentarioForo> comentarios; //usuario que genera el foro
-    
 }

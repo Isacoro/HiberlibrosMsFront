@@ -22,12 +22,12 @@ public class AutorLibro {
 	  	@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Integer id;
-	  	
-            @ManyToOne(cascade = CascadeType.ALL)
+
+		@ManyToOne(cascade = CascadeType.ALL)
 	    @JoinColumn(name = "id_autor")
 	    private Autor autor;
 	    
-            @ManyToOne(cascade = CascadeType.ALL)
+        @ManyToOne(cascade = CascadeType.ALL)
 	    @JoinColumn(name = "id_libro")
 	    private Libro libro;
 }

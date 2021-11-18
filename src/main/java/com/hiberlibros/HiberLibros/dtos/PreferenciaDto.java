@@ -14,9 +14,6 @@ import lombok.ToString;
 public class PreferenciaDto {
     
     private Integer id;
-   
     private Genero genero;
-    
     private Usuario usuario;
-    
 }

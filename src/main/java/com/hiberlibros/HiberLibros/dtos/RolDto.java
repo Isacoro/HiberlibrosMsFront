@@ -11,11 +11,9 @@ import org.springframework.security.core.GrantedAuthority;
 public class RolDto implements GrantedAuthority {
 
     private String nombre;
-    
     public void setNombre_rol(String valor){
         nombre=valor;
     }
-    
     public String getNombre_rol(){
         return nombre;
     }

@@ -1,9 +1,7 @@
 package com.hiberlibros.HiberLibros.feign;
 
-import com.hiberlibros.HiberLibros.dtos.PreferenciaDto;
 import com.hiberlibros.HiberLibros.feign.preferenciaDto.VerPreferenciasDto;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +17,6 @@ public interface PreferenciaFeign {
     @PostMapping("/guardar")
     public void anadirPreferencia(@RequestParam Integer idGenero, @RequestParam String email);
     
-     @GetMapping("/borrar")
+    @GetMapping("/borrar")
     public void borrarPreferencia(@RequestParam Integer id);
-    
-    
-    
 }
