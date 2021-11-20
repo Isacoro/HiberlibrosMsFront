@@ -6,12 +6,8 @@
             <div class="row">
                 <div class="col-12 ">
                     <ul class="nav">
-                        <!--                        <li class="nav-item"><a  href="#tusLibros" class="btn btn-secondary">Tus Libros</a></li>
-                                                <li class="nav-item"><a  href="#tusRelatos" class="btn btn-secondary">Tus Relatos</a></li>-->
-                        <li class="nav-item"><a  href="#tusPeticiones" class="btn btn-secondary">Tus Peticiones</a></li>
-                        <li class="nav-item"><a  href="#tusIntercambios" class="btn btn-secondary">Tus Intercambios</a></li>             
-
-
+                        <li class="nav-item"><a  href="#tusPeticiones" class="btn btn-secondary">Peticiones</a></li>
+                        <li class="nav-item"><a  href="#tusIntercambios" class="btn btn-secondary">Intercambios</a></li>
                     </ul>
                 </div> 
             </div>
@@ -60,10 +56,6 @@
                             <a th:onclick="|eliminarU(${usuario.id})|" href="#" class="float-right btn-danger btn-sm m-2 mt-6" title='Borrar usuario'>Eliminar cuenta</a>
                         </div>
 
-
-
-
-
                         <div class="bannerPerfil  px-4 pt-0 pb-4 cover " >
 
                             <div class="media align-items-end profile-head">
@@ -83,25 +75,14 @@
                                         <input  type="hidden" name="id" th:value="${usuario.id}"/>           
 
                                         <div class="form-group" id="ocultar">
-
                                             <label for="file-upload" class="custom-file-upload ">
                                                 <i class="fas fa-file-image"> </i>  Seleccionar imagen
                                             </label>
                                             <input id="file-upload" type="file" name="ficheroImagen" required/>
                                             <input type="submit" class="btn btn-dark btn-sm btn-block col-6" value="Cambiar" />
-
                                         </div>
-
-
-
-
-
-
-                                    </form>  
-
-
+                                    </form>
                                 </div>
-
                             </div>
                         </div>
                         <div class="bg-light p-3 d-flex justify-content-end text-center">
@@ -110,27 +91,18 @@
                                     <h5 class="font-weight-bold mb-0 d-block" th:text="${librosUsuario}"></h5><i class="fas fa-book " style="color:black"> </i>   Mis libros
                                 </li>
                                 <li class="list-inline-item">
-                                    <h5 class="font-weight-bold mb-0 d-block" th:text="${numIntercambioPendiente}"></h5><i class="far fa-handshake" style="color:black"></i>     Intercambios pendientes
+                                    <h5 class="font-weight-bold mb-0 d-block" th:text="${numIntercambioPendiente}"></h5><i class="far fa-handshake" style="color:black"></i>     Intercambios
                                 </li>
                                 <li class="list-inline-item"> 
                                     <h5 class="font-weight-bold mb-0 d-block" th:text="${(usuario.valoracionUsuario == null)?0:usuario.valoracionUsuario}"></h5> <i class="fas fa-star" style="color:orange"> </i>    Mi valoración
-
-
                                 </li>
                             </ul>
                         </div>
-
-
-
-
                         <div class="py-4 px-4">
                             <div class="d-flex align-items-center justify-content-between mb-3">
                                 <h3 class="mb-0">Mis libros</h3>
                                 <a href="/hiberlibros/guardarLibro" class="btn btn-primary"><i class="fas fa-plus-square"></i>&nbsp;Añadir libro</a>
                             </div>
-
-
-
                             <div class="row">
                                 <div class="col-lg-4 mb-4 " th:each='l:${libros}'>
                                     <div class="card ">        
@@ -145,31 +117,23 @@
                                             <p class="font mb-0 font-weight-bold">Género :  <td th:text="${l.libro.genero.nombre}"></td>
                                             <p class="font mb-0 font-weight-bold">Valoración : <td th:text="${l.libro.valoracionLibro}"></td>  <i class="fas fa-star" style="color:orange"> </i> 
                                             <p class="font mb-0 font-weight-bold">Estado :   <td th:text="${l.estadoConservacion}"></td>
-
-
                                             <p class="card-text"></p>
                                             <td><a th:href="@{/hiberlibros/borrarUL(id=${l.id})}" class="btn btn-outline-danger btn-sm">Borrar <i class="fas fa-trash-alt"></i></a></td>
-
-
                                         </div>                                    
                                     </div>
                                 </div>
-
                             </div>
-
                             <div class="row">
                                 <div id="tusRelatos" class='col-12'>
                                     <h2>Tus relatos</h2>
                                     <table class="testbox table"  >
                                         <tr>
-
                                             <th>titulo</th>
                                             <th>Género</th>
                                             <th>Valoraciones</th>
                                             <th>NºValoraciones</th>
                                         </tr>
-                                        <tr th:each="rel:${relatos}">    
-
+                                        <tr th:each="rel:${relatos}">
                                             <td th:text="${rel.titulo}"></td>
                                             <td th:text="${rel.genero.nombre}"></td>   
                                             <td class="text-center"> 
@@ -178,17 +142,15 @@
                                             </td>  
                                             <td th:text="${rel.numeroValoraciones}" style="text-align: center"></td> 
                                             <td><a th:href="@{/relato/eliminarRelato(id=${rel.id})}" class="btn btn-sm btn-secondary">Borrar</a></td>
-
                                         </tr>
                                     </table>
                                     <a th:href="@{/hiberlibros/relato(id=${usuario.id})}" class="btn btn-primary"><i class="fas fa-plus-square"></i>&nbsp;Añadir relato</a>
-
                                 </div>
                             </div>
 
                             <div id="tusPeticiones" class="row">
                                 <div class='col-6'>
-                                    <h2>Nuevas Peticiones</h2>
+                                    <h2>Peticiones usuarios</h2>
                                     <table class="testbox table ">
                                         <thead>
                                             <tr>
@@ -207,7 +169,7 @@
                                     </table>
                                 </div>
                                 <div class='col-6'>
-                                    <h2>Tus peticiones</h2>
+                                    <h2>Mis peticiones</h2>
                                     <table class="testbox table">
                                         <thead>
                                             <tr>

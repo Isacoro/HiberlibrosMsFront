@@ -18,7 +18,6 @@
                     <td th:text="${libro.isbn}"></td>
                     <td th:text="${libro.titulo}"></td>
                     <td th:text="${libro.idioma}"></td>
-                    <!--<td ><span th:if="${libro.autor!=null}" th:text="${libro.autor.nombre + ' ' + libro.autor.apellidos}"></span></td>-->
                     <td th:text="${#objects.nullSafe(libro?.autor?.nombre,'') + ' ' + #objects.nullSafe(libro?.autor?.apellidos,'')}"></td>
                     <td th:text="${libro.editorial.nombreEditorial}"></td>
                     <td th:text="${libro.genero.nombre}"></td>

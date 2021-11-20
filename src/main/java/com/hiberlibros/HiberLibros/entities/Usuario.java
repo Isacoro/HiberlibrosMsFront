@@ -32,8 +32,6 @@ public class Usuario {
     private String mail;
     private String telef;
     private Double valoracionUsuario;
-    private Double longitud;
-    private Double latitud;
     private String uriFoto;
     private Boolean desactivado;
 }
